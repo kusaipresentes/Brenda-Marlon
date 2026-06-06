@@ -326,19 +326,24 @@ function showModal(item){
             </p>`;
   } 
   else if(item.type === 'image'){
-    html = `<h3>${item.title}</h3><img src="${item.content}" style="max-width:100%; border-radius:16px;">`;
+    // Imagem com mínimo de fundo possível
+    content.style.padding = '10px';
+    content.style.maxWidth = '95%';
+    html = `<img src="${item.content}" style="width:100%; max-height:80vh; object-fit:contain; border-radius:8px; display:block;">`;
   } 
   else if(item.type === 'video'){
-    // Pausa a música automaticamente
+    // Pausa a música de fundo
     const bgMusic = document.getElementById('bg-music');
     if (bgMusic) bgMusic.pause();
 
+    // Vídeo com autoplay automático
     html = `
-      <h3 style="margin-bottom:15px;">${item.title}</h3>
+      <h3 style="margin-bottom:12px;">${item.title}</h3>
       <video 
+        autoplay 
         controls 
         playsinline 
-        style="width:100%; max-height:55vh; border-radius:12px; background:#000; display:block;">
+        style="width:100%; max-height:60vh; border-radius:12px; background:#000; display:block;">
         <source src="${item.content}" type="video/mp4">
       </video>
     `;
