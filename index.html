@@ -4,7 +4,6 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Brenda & Marlon - Nosso Amor</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&family=Cormorant+Garamond:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
@@ -13,7 +12,6 @@ body {
   font-family:'Inter',sans-serif;
   background: linear-gradient(135deg,#f8f3f1 0%,#fff8f6 100%);
   color:#222;
-  overflow-x:hidden;
   min-height:100vh;
 }
 #welcome-screen {
@@ -22,9 +20,7 @@ body {
   transition:.8s;
 }
 .welcome-heart { font-size:90px; cursor:pointer; animation:heartbeat 1.4s infinite; }
-.welcome-text {
-  margin-top:18px; font-size:24px; font-family:'Playfair Display',serif; color:#dc6478;
-}
+.welcome-text { margin-top:18px; font-size:24px; font-family:'Playfair Display',serif; color:#dc6478; }
 @keyframes heartbeat { 0%,100%{transform:scale(1);} 25%{transform:scale(1.08);} 50%{transform:scale(1);} }
 
 .container {
@@ -34,111 +30,76 @@ body {
 .container.visible { opacity:1; transform:none; }
 
 .hero { text-align:center; margin-top:20px; }
-.photo {
-  border-radius:30px; overflow:hidden;
-  box-shadow:0 20px 60px rgba(220,100,120,.18);
-  border:1px solid rgba(255,255,255,.6);
-  margin-bottom:28px;
-}
+.photo { border-radius:30px; overflow:hidden; box-shadow:0 20px 60px rgba(220,100,120,.18); border:1px solid rgba(255,255,255,.6); margin-bottom:28px; }
 .photo img { width:100%; display:block; }
 
 h1 {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 52px; font-weight: 700; line-height: 1.15;
+  font-size: 52px; font-weight: 700;
   background: linear-gradient(135deg, #dc6478 0%, #e8839a 100%);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  margin-bottom: 8px;
 }
 
 .card {
   background:rgba(255,255,255,.72); backdrop-filter:blur(14px);
   border:1px solid rgba(255,255,255,.6);
   padding:26px; border-radius:28px; margin-top:22px;
-  box-shadow:0 10px 30px rgba(0,0,0,.05); transition:.25s;
+  box-shadow:0 10px 30px rgba(0,0,0,.05);
 }
-.card:hover { transform:translateY(-2px); }
+.title { font-size:12px; letter-spacing:3px; text-transform:uppercase; font-weight:700; opacity:.45; margin-bottom:14px; }
+.message { font-size:28px; line-height:1.35; font-family:'Playfair Display',serif; color:#2d2d2d; }
+.counter { font-size:34px; font-weight:700; background:linear-gradient(135deg,#dc6478,#ea8da0); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
 
-.title {
-  font-size:12px; letter-spacing:3px; text-transform:uppercase;
-  font-weight:700; opacity:.45; margin-bottom:14px;
-}
-.message {
-  font-size:28px; line-height:1.35;
-  font-family:'Playfair Display',serif; color:#2d2d2d;
-}
-.counter {
-  font-size:34px; font-weight:700;
-  background:linear-gradient(135deg,#dc6478,#ea8da0);
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-  margin-bottom:10px;
-}
-.small { font-size:14px; color:#777; }
-
-.music-player {
-  display:flex; align-items:center; gap:16px;
-}
+.music-player { display:flex; align-items:center; gap:16px; }
 .music-cover {
   width:68px; height:68px; border-radius:18px;
   background: url('Ainda-bem-Menos-e-mais.png') center/cover;
   box-shadow:0 10px 25px rgba(220,100,120,.3);
 }
-.music-info { flex:1; }
-.song-title { font-size:16px; font-weight:700; margin-bottom:4px; }
-.song-artist { font-size:13px; color:#777; margin-bottom:10px; }
+.wave { display:flex; align-items:flex-end; gap:3px; height:22px; }
+.bar { width:4px; height:6px; background:#dc6478; border-radius:20px; animation:wave 0.9s infinite ease-in-out; }
+.bar:nth-child(2){animation-delay:.1s;}
+.bar:nth-child(3){animation-delay:.2s;}
+.bar:nth-child(4){animation-delay:.3s;}
+.bar:nth-child(5){animation-delay:.4s;}
+@keyframes wave { 0%,100%{height:6px;} 50%{height:22px;} }
 
 button {
-  width:100%; border:none; padding:18px; border-radius:18px;
-  background:linear-gradient(135deg,#dc6478,#ea8da0);
-  color:white; font-size:15px; font-weight:700;
-  cursor:pointer; margin-top:18px;
-  box-shadow:0 10px 25px rgba(220,100,120,.3);
+  width:100%; padding:18px; border:none; border-radius:18px;
+  background:linear-gradient(135deg,#dc6478,#ea8da0); color:white;
+  font-weight:700; cursor:pointer; margin-top:18px; transition:.3s;
 }
-button:active { transform:scale(.98); }
+button:active { transform:scale(0.95); }
+.surprise-btn { animation: surprisePulse 2s infinite; }
+@keyframes surprisePulse { 0%,100% { transform:scale(1); } 50% { transform:scale(1.05); } }
 
 .modal-overlay {
   position:fixed; inset:0; background:rgba(0,0,0,.85);
-  display:flex; justify-content:center; align-items:center;
-  padding:20px; z-index:99999;
+  display:flex; justify-content:center; align-items:center; z-index:99999;
 }
 .modal-content {
-  background:white; padding:30px; border-radius:28px;
-  max-width:420px; width:100%; text-align:center;
+  background:white; padding:30px; border-radius:28px; max-width:420px; width:100%; text-align:center;
 }
 audio, video { width:100%; margin-top:15px; border-radius:14px; }
-
-.confetti {
-  position:fixed; width:10px; height:10px; border-radius:50%;
-  pointer-events:none; animation:fall 2s linear forwards; z-index:99999;
-}
-@keyframes fall { to { transform:translateY(120vh) rotate(720deg); opacity:0; } }
-
-@media(max-width:480px) {
-  h1 { font-size:40px; }
-  .counter { font-size:28px; }
-  .message { font-size:24px; }
-}
 </style>
 </head>
 <body>
 
-<!-- WELCOME -->
 <div id="welcome-screen" onclick="startExperience()">
   <div class="welcome-heart">❤️</div>
   <div class="welcome-text">Clique para abrir</div>
 </div>
 
-<!-- AUDIO -->
 <audio id="bg-music" loop>
   <source src="Ainda-bem-Menos-e-mais.mp3.mp3" type="audio/mpeg">
 </audio>
 
-<!-- MAIN -->
 <div class="container" id="main-content">
   <div class="hero">
-    <div class="photo">
-      <img src="foto-casal.jpeg" alt="Brenda & Marlon">
-    </div>
+    <div class="photo"><img src="foto-casal.jpeg" alt="Brenda & Marlon"></div>
     <h1>Brenda & Marlon</h1>
-    <div class="subtitle" style="font-family:'Playfair Display',serif; font-size:22px; color:#dc6478; margin-top:-10px;">
+    <div style="font-family:'Playfair Display',serif; font-size:22px; color:#dc6478; text-align:center;">
       Nosso amor é a melhor parte da minha vida
     </div>
   </div>
@@ -154,38 +115,37 @@ audio, video { width:100%; margin-top:15px; border-radius:14px; }
     <div class="small">Desde 18/03/2024</div>
   </div>
 
-  <!-- MUSIC -->
   <div class="card">
     <div class="title">Nossa música</div>
     <div class="music-player playing" id="music-player">
       <div class="music-cover"></div>
-      <div class="music-info">
-        <div class="song-title">Ainda Bem</div>
-        <div class="song-artist">Menos é Mais</div>
+      <div style="flex:1">
+        <div style="font-weight:700;">Ainda Bem</div>
+        <div style="color:#777; font-size:14px;">Menos é Mais</div>
         <div class="wave">
           <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
         </div>
       </div>
     </div>
-    <button id="music-btn" onclick="toggleMusic()">Pausar Música ⏸️</button>
+    <button id="music-btn" onclick="toggleMusic()">⏸️ Pausar Música</button>
   </div>
 
   <div class="card">
     <div class="title">Surpresa</div>
-    <button onclick="triggerSurprise()">Clique para descobrir ✨</button>
+    <button id="surpriseBtn" class="surprise-btn" onclick="triggerSurprise()">Clique para descobrir ✨</button>
   </div>
 
   <!-- FOOTER -->
-  <div class="footer">
-    <div class="socials">
-      <a href="https://instagram.com/kusaipresentes" target="_blank" class="social-btn">
+  <div class="footer" style="margin-top:50px; text-align:center; padding-bottom:30px;">
+    <div style="display:flex; justify-content:center; gap:16px; margin-bottom:20px;">
+      <a href="https://instagram.com/kusaipresentes" target="_blank" style="width:54px;height:54px;border-radius:50%;background:white;display:flex;align-items:center;justify-content:center;text-decoration:none;color:#dc6478;font-size:24px;box-shadow:0 8px 22px rgba(0,0,0,.08);">
         <i class="fab fa-instagram"></i>
       </a>
-      <a href="https://wa.me/5521983034801" target="_blank" class="social-btn">
+      <a href="https://wa.me/5521983034801" target="_blank" style="width:54px;height:54px;border-radius:50%;background:white;display:flex;align-items:center;justify-content:center;text-decoration:none;color:#dc6478;font-size:24px;box-shadow:0 8px 22px rgba(0,0,0,.08);">
         <i class="fab fa-whatsapp"></i>
       </a>
     </div>
-    <div class="footer-text">criado com ❤️ por Kusai Presentes</div>
+    <div style="font-size:13px; color:#888;">criado com ❤️ por Kusai Presentes</div>
   </div>
 </div>
 
@@ -194,94 +154,167 @@ audio, video { width:100%; margin-top:15px; border-radius:14px; }
 const startDate = new Date(2024, 2, 18);
 
 const specialMessages = {
-  "12-06": "Eu escolhi você para ficar, meu grande amor! 😍"
+  "12-06": "12/06 - Eu escolhi você para ficar, meu grande amor! 😍"
 };
 
-const messages = [
-  "Você ainda é meu lugar favorito.",
-  "Seu abraço continua sendo minha paz.",
-  "Com você, tudo faz sentido.",
-  "Obrigado por existir na minha vida.",
-  "Eu escolheria você de novo.",
-  "Nosso amor mora nos detalhes.",
-  "Você faz o mundo parecer mais leve.",
-  "Até nos dias difíceis, ainda é você."
+// 60 mensagens para o "Mensagem de hoje"
+const dailyMessages = [
+  "Você ainda é meu lugar favorito.", "Seu abraço continua sendo minha paz.", 
+  "Com você, tudo faz sentido.", "Obrigado por existir na minha vida.",
+  "Eu escolheria você de novo.", "Nosso amor mora nos detalhes.",
+  "Você faz o mundo parecer mais leve.", "Até nos dias difíceis, ainda é você.",
+  "Mesmo quando você não está por perto, meu dia continua cheio de você.",
+  "Você é a melhor parte da minha rotina.", "Só de saber que vou te ver mais tarde, meu coração já sorri.",
+  "Não existe distância quando alguém mora nos nossos pensamentos.",
+  "Você transforma qualquer dia comum em um dia especial.",
+  "Meu lugar favorito continua sendo ao seu lado.",
+  "Mesmo nas horas em que estamos longe, sinto você perto de mim.",
+  "Seu abraço ainda é o lugar onde eu encontro paz.",
+  "Você faz parte de todos os meus melhores momentos, até dos mais simples.",
+  "O meu dia sempre fica melhor quando lembro que tenho você.",
+  "Você está presente até nos pequenos detalhes da minha vida.",
+  "Não importa quanto tempo passe até a gente se encontrar de novo, você continua sendo o meu pensamento favorito.",
+  "Ter você na minha vida faz qualquer espera valer a pena.",
+  "A melhor lembrança do meu dia quase sempre envolve você.",
+  "Às vezes eu paro e sorrio, só porque lembrei de nós.",
+  "Você é aquela parte boa do dia que nunca perde a graça.",
+  "O amor que sinto por você aparece nas coisas mais simples.",
+  "Você consegue fazer meu coração se sentir em casa, mesmo quando não está aqui.",
+  "Se existe um lugar onde eu sempre quero voltar, esse lugar é você.",
+  "Quando você ler isso, só quero que saiba: amar você continua sendo a coisa mais bonita que acontece nos meus dias.",
+  "Você é o motivo do meu sorriso bobo sem motivo aparente.",
+  "Cada mensagem sua ilumina meu dia inteiro.",
+  "Meu coração escolheu você e não quer mais saber de outra pessoa.",
+  "Com você, até o silêncio é confortável e bonito.",
+  "Você é minha pessoa favorita no mundo inteiro.",
+  "Te amar se tornou minha atividade preferida do dia.",
+  "Você torna os dias bons ainda melhores e os difíceis mais leves.",
+  "Meu futuro sempre teve seu nome desde o dia que te conheci.",
+  "Você é o tipo de amor que eu leria várias vezes.",
+  "Sinto que meu coração bate mais bonito quando penso em você.",
+  "Você é o pedacinho de céu que eu carrego comigo todos os dias.",
+  "Amar você é fácil, difícil é imaginar a vida sem você.",
+  "Você chegou e mudou completamente o significado de 'felicidade'.",
+  "Todo dia eu me apaixono um pouquinho mais por você.",
+  "Você é meu refúgio, minha paz e minha maior aventura.",
+  "Não preciso de nada mais, só de você do meu lado.",
+  "Seu sorriso ainda é minha cena favorita.",
+  "Você é o motivo pelo qual eu acredito no amor.",
+  "Meu coração encontrou em você seu lugar preferido no mundo.",
+  "Cada segundo ao seu lado vale por mil dias comuns.",
+  "Você é a melhor decisão que eu já tomei na vida.",
+  "Te ter na minha vida é o maior presente que eu poderia receber.",
+  "Você faz com que o amor pareça simples e verdadeiro.",
+  "Meu dia só fica completo quando falo com você.",
+  "Você é a calmaria que eu precisava no meio da correria.",
+  "Amar você é como voltar pra casa todos os dias.",
+  "Você é minha história favorita para contar e recontar.",
+  "Com você, o amor não é só um sentimento, é um lar.",
+  "Você me ensinou o que é amar de verdade.",
+  "Meu coração sorri toda vez que seu nome aparece.",
+  "Você é e sempre será minha pessoa.",
+  "Gratidão é pouco para tudo que sinto por ter você na minha vida."
 ];
 
-const surprises = [
-  { type: "text", content: "Amor, só queria te lembrar que você é uma das melhores coisas que já aconteceram na minha vida. Seu carinho, seu abraço e seu jeito fazem meus dias mais felizes. Te amo muito e sou grata por ter você ao meu lado. ❤️" },
-  { type: "image", content: "foto-surpresa.jpeg", title: "Uma foto especial pra você 📸" },
-  { type: "video", content: "video-surpresa.mp4", title: "Nossos momentos 🎥" }
-];
+// As 20 mensagens + mídias para Surpresas
+let surprisesPool = [];
+let currentSurprises = [];
+
+function resetSurprises() {
+  surprisesPool = [
+    { type: "text", content: "Amor, só queria te lembrar que você é uma das melhores coisas que já aconteceram na minha vida. Seu carinho, seu abraço e seu jeito fazem meus dias mais felizes. Te amo muito e sou grata por ter você ao meu lado. ❤️", weight: 6 },
+    { type: "image", content: "foto-surpresa.jpeg", title: "Uma foto especial pra você 📸", weight: 8 },
+    { type: "video", content: "video-surpresa.mp4", title: "Nossos momentos 🎥", weight: 8 },
+    // As 20 mensagens específicas para surpresa
+    { type: "text", content: "Mesmo quando você não está por perto, meu dia continua cheio de você." },
+    { type: "text", content: "Você é a melhor parte da minha rotina." },
+    { type: "text", content: "Só de saber que vou te ver mais tarde, meu coração já sorri." },
+    { type: "text", content: "Não existe distância quando alguém mora nos nossos pensamentos." },
+    { type: "text", content: "Você transforma qualquer dia comum em um dia especial." },
+    { type: "text", content: "Meu lugar favorito continua sendo ao seu lado." },
+    { type: "text", content: "Mesmo nas horas em que estamos longe, sinto você perto de mim." },
+    { type: "text", content: "Seu abraço ainda é o lugar onde eu encontro paz." },
+    { type: "text", content: "Você faz parte de todos os meus melhores momentos, até dos mais simples." },
+    { type: "text", content: "O meu dia sempre fica melhor quando lembro que tenho você." },
+    { type: "text", content: "Você está presente até nos pequenos detalhes da minha vida." },
+    { type: "text", content: "Não importa quanto tempo passe até a gente se encontrar de novo, você continua sendo o meu pensamento favorito." },
+    { type: "text", content: "Ter você na minha vida faz qualquer espera valer a pena." },
+    { type: "text", content: "A melhor lembrança do meu dia quase sempre envolve você." },
+    { type: "text", content: "Às vezes eu paro e sorrio, só porque lembrei de nós." },
+    { type: "text", content: "Você é aquela parte boa do dia que nunca perde a graça." },
+    { type: "text", content: "O amor que sinto por você aparece nas coisas mais simples." },
+    { type: "text", content: "Você consegue fazer meu coração se sentir em casa, mesmo quando não está aqui." },
+    { type: "text", content: "Se existe um lugar onde eu sempre quero voltar, esse lugar é você." },
+    { type: "text", content: "Quando você ler isso, só quero que saiba: amar você continua sendo a coisa mais bonita que acontece nos meus dias." }
+  ];
+  shuffleArray(surprisesPool);
+  currentSurprises = [...surprisesPool];
+}
+
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
 
 // ==================== FUNÇÕES ====================
 function startExperience(){
-  const music = document.getElementById('bg-music');
-  music.play().catch(e => console.log("Autoplay bloqueado:", e));
-  
+  document.getElementById('bg-music').play().catch(()=>{});
   document.getElementById('welcome-screen').style.opacity = '0';
-  setTimeout(() => document.getElementById('welcome-screen').style.visibility = 'hidden', 800);
-  
+  setTimeout(() => document.getElementById('welcome-screen').style.visibility='hidden', 800);
   document.getElementById('main-content').classList.add('visible');
-  loadDailyMessage();
-  updateCounter();
+  loadDailyMessage(); updateCounter();
+  resetSurprises();
 }
 
 function toggleMusic(){
   const music = document.getElementById('bg-music');
   const btn = document.getElementById('music-btn');
-  const player = document.getElementById('music-player');
-  
   if(music.paused){
     music.play();
-    btn.innerHTML = 'Pausar Música ⏸️';
-    player.classList.add('playing');
+    btn.innerHTML = '⏸️ Pausar Música';
   } else {
     music.pause();
-    btn.innerHTML = 'Tocar Música ▶️';
-    player.classList.remove('playing');
+    btn.innerHTML = '▶️ Tocar Música';
   }
 }
 
 function loadDailyMessage(){
   const now = new Date();
-  const monthDay = `${now.getMonth()+1}`.padStart(2,'0') + '-' + `${now.getDate()}`.padStart(2,'0');
-  
-  // Verifica se tem mensagem especial hoje
-  if(specialMessages[monthDay]){
-    document.getElementById('dailyMessage').innerText = specialMessages[monthDay];
-  } else {
-    const day = Math.floor((now - new Date(now.getFullYear(),0,0)) / 86400000);
-    document.getElementById('dailyMessage').innerText = messages[day % messages.length];
-  }
+  const key = `${now.getMonth()+1}`.padStart(2,'0') + '-' + `${now.getDate()}`.padStart(2,'0');
+  document.getElementById('dailyMessage').innerText = specialMessages[key] || dailyMessages[Math.floor(Math.random()*dailyMessages.length)];
 }
 
-function updateCounter(){ /* mantido igual */ 
+function updateCounter(){
   const now = new Date();
   let years = now.getFullYear() - startDate.getFullYear();
   let months = now.getMonth() - startDate.getMonth();
   let days = now.getDate() - startDate.getDate();
-  if(days < 0){ months--; const lastMonth = new Date(now.getFullYear(), now.getMonth(), 0).getDate(); days += lastMonth; }
+  if(days < 0){ months--; days += new Date(now.getFullYear(), now.getMonth(), 0).getDate(); }
   if(months < 0){ years--; months += 12; }
   document.getElementById('counter').innerText = `${years} anos, ${months} meses e ${days} dias`;
 }
 
 function triggerSurprise(){
   createConfetti();
-  const item = surprises[Math.floor(Math.random() * surprises.length)];
+  
+  if (currentSurprises.length === 0) resetSurprises();
+  
+  const item = currentSurprises.pop();
   showModal(item);
 }
 
-function createConfetti(){ /* mantido igual */ 
+function createConfetti(){
   const colors = ['#dc6478','#ea8da0','#ffd1dc'];
-  for(let i=0; i<40; i++){
+  for(let i=0; i<50; i++){
     const el = document.createElement('div');
     el.className = 'confetti';
     el.style.left = Math.random()*100 + 'vw';
     el.style.background = colors[Math.floor(Math.random()*colors.length)];
-    el.style.animationDuration = (Math.random()*2 + 1) + 's';
+    el.style.animationDuration = (Math.random()*2.5 + 1.5) + 's';
     document.body.appendChild(el);
-    setTimeout(() => el.remove(), 3000);
+    setTimeout(() => el.remove(), 4000);
   }
 }
 
@@ -291,24 +324,15 @@ function showModal(item){
   const content = document.createElement('div');
   content.className = 'modal-content';
   
-  let html = '';
-  if(item.type === 'text'){
-    html = `<p style="font-size:26px; line-height:1.4; font-family:'Playfair Display',serif;">${item.content}</p>`;
-  } else if(item.type === 'image'){
-    html = `<h3>${item.title}</h3><img src="${item.content}" style="width:100%; border-radius:16px; margin:15px 0;">`;
-  } else if(item.type === 'video'){
-    html = `<h3>${item.title}</h3>
-            <video controls autoplay>
-              <source src="${item.content}">
-            </video>`;
-  }
+  let html = item.title ? `<h3>${item.title}</h3>` : '';
+  if(item.type === 'text') html += `<p style="font-size:26px;line-height:1.4;">${item.content}</p>`;
+  else if(item.type === 'image') html += `<img src="${item.content}" style="max-width:100%;border-radius:16px;">`;
+  else if(item.type === 'video') html += `<video controls autoplay><source src="${item.content}"></video>`;
   
   content.innerHTML = html;
   const btn = document.createElement('button');
-  btn.innerText = 'Fechar ❤️';
-  btn.onclick = () => overlay.remove();
+  btn.textContent = 'Fechar ❤️'; btn.onclick = () => overlay.remove();
   content.appendChild(btn);
-  
   overlay.appendChild(content);
   document.body.appendChild(overlay);
 }
