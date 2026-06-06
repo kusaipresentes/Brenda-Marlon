@@ -339,19 +339,33 @@ function showModal(item){
   content.className = 'modal-content';
   
   let html = '';
+
   if(item.type === 'text'){
-    html = `<div class="note">${item.content}</div>`;
-  } else if(item.type === 'image'){
+    // Verifica se é a mensagem especial longa
+    if(item.content.includes("Amor, só queria te lembrar que você é uma das melhores coisas")) {
+      // Aplica o estilo de bilhetinho só nessa mensagem
+      html = `<div class="note">${item.content}</div>`;
+    } else {
+      // Mensagens curtas normais (mais limpas)
+      html = `<p style="font-size:24px; line-height:1.5; padding:20px 10px; color:#3f2a1e; font-family:'Playfair Display',serif;">
+                ${item.content}
+              </p>`;
+    }
+  } 
+  else if(item.type === 'image'){
     html = `<h3>${item.title}</h3><img src="${item.content}" style="max-width:100%;border-radius:16px;">`;
-  } else if(item.type === 'video'){
+  } 
+  else if(item.type === 'video'){
     html = `<h3>${item.title}</h3><video controls autoplay><source src="${item.content}"></video>`;
   }
   
   content.innerHTML = html;
+
   const btn = document.createElement('button');
   btn.textContent = 'Fechar ❤️';
   btn.onclick = () => overlay.remove();
   content.appendChild(btn);
+
   overlay.appendChild(content);
   document.body.appendChild(overlay);
 }
