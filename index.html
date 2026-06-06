@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Brenda & Marlon - Nosso Amor</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&family=Cormorant+Garamond:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&family=Cormorant+Garamond:wght@700&family=Great+Vibes&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
@@ -14,6 +14,29 @@ body {
   color:#222;
   min-height:100vh;
 }
+
+/* Bilhetinho Romântico */
+.note {
+  background: #fffef0;
+  background-image: 
+    linear-gradient(#f8e8c7 1px, transparent 1px),
+    linear-gradient(90deg, #f8e8c7 1px, transparent 1px);
+  background-size: 20px 20px;
+  border: 1px solid #e8d5b8;
+  box-shadow: 8px 8px 15px rgba(0,0,0,0.15),
+              inset 0 0 40px rgba(220, 100, 120, 0.08);
+  padding: 45px 35px;
+  max-width: 100%;
+  margin: 25px auto;
+  position: relative;
+  transform: rotate(-1deg);
+  font-family: 'Great Vibes', cursive;
+  font-size: 26px;
+  line-height: 1.45;
+  color: #3f2a1e;
+  text-align: center;
+}
+
 #welcome-screen {
   position:fixed; inset:0; background:white; z-index:9999;
   display:flex; flex-direction:column; justify-content:center; align-items:center;
@@ -23,10 +46,7 @@ body {
 .welcome-text { margin-top:18px; font-size:24px; font-family:'Playfair Display',serif; color:#dc6478; }
 @keyframes heartbeat { 0%,100%{transform:scale(1);} 25%{transform:scale(1.08);} 50%{transform:scale(1);} }
 
-.container {
-  max-width:520px; margin:auto; padding:28px 22px 60px;
-  opacity:0; transform:translateY(20px); transition:1s;
-}
+.container { max-width:520px; margin:auto; padding:28px 22px 60px; opacity:0; transform:translateY(20px); transition:1s; }
 .container.visible { opacity:1; transform:none; }
 
 .hero { text-align:center; margin-top:20px; }
@@ -38,7 +58,6 @@ h1 {
   font-size: 52px; font-weight: 700;
   background: linear-gradient(135deg, #dc6478 0%, #e8839a 100%);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  margin-bottom: 8px;
 }
 
 .card {
@@ -76,12 +95,11 @@ button:active { transform:scale(0.95); }
 
 .modal-overlay {
   position:fixed; inset:0; background:rgba(0,0,0,.85);
-  display:flex; justify-content:center; align-items:center; z-index:99999;
+  display:flex; justify-content:center; align-items:center; z-index:99999; padding:20px;
 }
 .modal-content {
-  background:white; padding:30px; border-radius:28px; max-width:420px; width:100%; text-align:center;
+  background:white; padding:30px; border-radius:28px; max-width:460px; width:100%; text-align:center;
 }
-audio, video { width:100%; margin-top:15px; border-radius:14px; }
 </style>
 </head>
 <body>
@@ -157,7 +175,6 @@ const specialMessages = {
   "12-06": "12/06 - Eu escolhi você para ficar, meu grande amor! 😍"
 };
 
-// 60 mensagens para o "Mensagem de hoje"
 const dailyMessages = [
   "Você ainda é meu lugar favorito.", "Seu abraço continua sendo minha paz.", 
   "Com você, tudo faz sentido.", "Obrigado por existir na minha vida.",
@@ -216,16 +233,14 @@ const dailyMessages = [
   "Gratidão é pouco para tudo que sinto por ter você na minha vida."
 ];
 
-// As 20 mensagens + mídias para Surpresas
 let surprisesPool = [];
 let currentSurprises = [];
 
 function resetSurprises() {
   surprisesPool = [
-    { type: "text", content: "Amor, só queria te lembrar que você é uma das melhores coisas que já aconteceram na minha vida. Seu carinho, seu abraço e seu jeito fazem meus dias mais felizes. Te amo muito e sou grata por ter você ao meu lado. ❤️", weight: 6 },
-    { type: "image", content: "foto-surpresa.jpeg", title: "Uma foto especial pra você 📸", weight: 8 },
-    { type: "video", content: "video-surpresa.mp4", title: "Nossos momentos 🎥", weight: 8 },
-    // As 20 mensagens específicas para surpresa
+    { type: "text", content: "Amor, só queria te lembrar que você é uma das melhores coisas que já aconteceram na minha vida. Seu carinho, seu abraço e seu jeito fazem meus dias mais felizes. Te amo muito e sou grata por ter você ao meu lado. ❤️" },
+    { type: "image", content: "foto-surpresa.jpeg", title: "Uma foto especial pra você 📸" },
+    { type: "video", content: "video-surpresa.mp4", title: "Nossos momentos 🎥" },
     { type: "text", content: "Mesmo quando você não está por perto, meu dia continua cheio de você." },
     { type: "text", content: "Você é a melhor parte da minha rotina." },
     { type: "text", content: "Só de saber que vou te ver mais tarde, meu coração já sorri." },
@@ -258,13 +273,14 @@ function shuffleArray(array) {
   }
 }
 
-// ==================== FUNÇÕES ====================
+// ==================== FUNÇÕES PRINCIPAIS ====================
 function startExperience(){
   document.getElementById('bg-music').play().catch(()=>{});
   document.getElementById('welcome-screen').style.opacity = '0';
   setTimeout(() => document.getElementById('welcome-screen').style.visibility='hidden', 800);
   document.getElementById('main-content').classList.add('visible');
-  loadDailyMessage(); updateCounter();
+  loadDailyMessage();
+  updateCounter();
   resetSurprises();
 }
 
@@ -298,9 +314,7 @@ function updateCounter(){
 
 function triggerSurprise(){
   createConfetti();
-  
   if (currentSurprises.length === 0) resetSurprises();
-  
   const item = currentSurprises.pop();
   showModal(item);
 }
@@ -324,14 +338,19 @@ function showModal(item){
   const content = document.createElement('div');
   content.className = 'modal-content';
   
-  let html = item.title ? `<h3>${item.title}</h3>` : '';
-  if(item.type === 'text') html += `<p style="font-size:26px;line-height:1.4;">${item.content}</p>`;
-  else if(item.type === 'image') html += `<img src="${item.content}" style="max-width:100%;border-radius:16px;">`;
-  else if(item.type === 'video') html += `<video controls autoplay><source src="${item.content}"></video>`;
+  let html = '';
+  if(item.type === 'text'){
+    html = `<div class="note">${item.content}</div>`;
+  } else if(item.type === 'image'){
+    html = `<h3>${item.title}</h3><img src="${item.content}" style="max-width:100%;border-radius:16px;">`;
+  } else if(item.type === 'video'){
+    html = `<h3>${item.title}</h3><video controls autoplay><source src="${item.content}"></video>`;
+  }
   
   content.innerHTML = html;
   const btn = document.createElement('button');
-  btn.textContent = 'Fechar ❤️'; btn.onclick = () => overlay.remove();
+  btn.textContent = 'Fechar ❤️';
+  btn.onclick = () => overlay.remove();
   content.appendChild(btn);
   overlay.appendChild(content);
   document.body.appendChild(overlay);
