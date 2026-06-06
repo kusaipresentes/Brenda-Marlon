@@ -326,24 +326,24 @@ function showModal(item){
             </p>`;
   } 
   else if(item.type === 'image'){
-    // Imagem com mínimo de fundo possível
-    content.style.padding = '10px';
-    content.style.maxWidth = '30%';
-    html = `<img src="${item.content}" style="width:100%; max-height:80vh; object-fit:contain; border-radius:8px; display:block;">`;
+    // IMAGEM bem justa (mínimo de fundo)
+    content.style.padding = '6px';
+    content.style.maxWidth = '520px';     // largura controlada (não muito larga)
+    content.style.borderRadius = '14px';
+    
+    html = `<img src="${item.content}" style="width:100%; max-height:80vh; object-fit:contain; border-radius:10px; display:block;">`;
   } 
   else if(item.type === 'video'){
-    // Pausa a música de fundo
     const bgMusic = document.getElementById('bg-music');
     if (bgMusic) bgMusic.pause();
 
-    // Vídeo com autoplay automático
     html = `
       <h3 style="margin-bottom:12px;">${item.title}</h3>
       <video 
         autoplay 
         controls 
         playsinline 
-        style="width:100%; max-height:60vh; border-radius:12px; background:#000; display:block;">
+        style="width:100%; max-height:58vh; border-radius:12px; background:#000; display:block;">
         <source src="${item.content}" type="video/mp4">
       </video>
     `;
