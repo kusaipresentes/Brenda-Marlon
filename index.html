@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Brenda & Marlon - Nosso Amor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&family=Cormorant+Garamond:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* (CSS mantido igual ao original - só adicionei a fonte Cormorant) */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+body{
+font-family:'Inter',sans-serif;
+background: linear-gradient(135deg,#f8f3f1 0%,#fff8f6 100%);
+color:#222;
+overflow-x:hidden;
+min-height:100vh;
+}
+#welcome-screen{
+position:fixed;
+inset:0;
+background:white;
+z-index:9999;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+transition:.8s;
+}
+.welcome-heart{
+font-size:90px;
+cursor:pointer;
+animation:heartbeat 1.4s infinite;
+}
+.welcome-text{
+margin-top:18px;
+font-size:24px;
+font-family:'Playfair Display',serif;
+color:#dc6478;
+}
+@keyframes heartbeat{
+0%,100%{transform:scale(1);}
+25%{transform:scale(1.08);}
+50%{transform:scale(1);}
+}
+.container{
+max-width:520px;
+margin:auto;
+padding:28px 22px 60px;
+opacity:0;
+transform:translateY(20px);
+transition:1s;
+}
+.container.visible{
+opacity:1;
+transform:none;
+}
+.hero{
+text-align:center;
+margin-top:20px;
+}
+.photo{
+border-radius:30px;
+overflow:hidden;
+box-shadow:0 20px 60px rgba(220,100,120,.18);
+border:1px solid rgba(255,255,255,.6);
+margin-bottom:28px;
+}
+.photo img{
+width:100%;
+display:block;
+}
+h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 52px;
+  font-weight: 700;
+  line-height: 1.15;
+  padding-bottom: 6px;
+  margin-bottom: 10px;
+  background: linear-gradient(135deg, #dc6478 0%, #e8839a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.card{
+background:rgba(255,255,255,.72);
+backdrop-filter:blur(14px);
+border:1px solid rgba(255,255,255,.6);
+padding:26px;
+border-radius:28px;
+margin-top:22px;
+box-shadow:0 10px 30px rgba(0,0,0,.05);
+transition:.25s;
+}
+.card:hover{
+transform:translateY(-2px);
+}
+.title{
+font-size:12px;
+letter-spacing:3px;
+text-transform:uppercase;
+font-weight:700;
+opacity:.45;
+margin-bottom:14px;
+}
+.message{
+font-size:28px;
+line-height:1.35;
+font-family:'Playfair Display',serif;
+color:#2d2d2d;
+}
+.counter{
+font-size:34px;
+font-weight:700;
+background:linear-gradient(135deg,#dc6478,#ea8da0);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+margin-bottom:10px;
+}
+.small{
+font-size:14px;
+color:#777;
+}
+button{
+width:100%;
+border:none;
+padding:18px;
+border-radius:18px;
+background:linear-gradient(135deg,#dc6478,#ea8da0);
+color:white;
+font-size:15px;
+font-weight:700;
+cursor:pointer;
+margin-top:18px;
+box-shadow:0 10px 25px rgba(220,100,120,.3);
+transition:.2s;
+}
+button:active{
+transform:scale(.98);
+}
+.footer{
+margin-top:48px;
+text-align:center;
+padding-bottom:20px;
+}
+.socials{
+display:flex;
+justify-content:center;
+gap:16px;
+margin-bottom:20px;
+}
+.social-btn{
+width:54px;
+height:54px;
+border-radius:50%;
+background:white;
+display:flex;
+align-items:center;
+justify-content:center;
+text-decoration:none;
+color:#dc6478;
+font-size:22px;
+box-shadow:0 8px 22px rgba(0,0,0,.08);
+transition:.25s;
+}
+.social-btn:hover{
+transform:translateY(-3px);
+}
+.footer-text{
+font-size:13px;
+color:#888;
+}
+.modal-overlay{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.85);
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
+z-index:99999;
+}
+.modal-content{
+background:white;
+padding:30px;
+border-radius:28px;
+max-width:420px;
+width:100%;
+text-align:center;
+}
+audio,video{
+width:100%;
+margin-top:15px;
+border-radius:14px;
+}
+.confetti{
+position:fixed;
+width:10px;
+height:10px;
+border-radius:50%;
+pointer-events:none;
+animation:fall 2s linear forwards;
+z-index:99999;
+}
+@keyframes fall{
+to{
+transform:translateY(120vh) rotate(720deg);
+opacity:0;
+}
+}
+@media(max-width:480px){
+h1{font-size:40px;}
+.counter{font-size:28px;}
+.message{font-size:24px;}
+}
+</style>
+</head>
+<body>
+
+<!-- WELCOME -->
+<div id="welcome-screen" onclick="startExperience()">
+  <div class="welcome-heart">❤️</div>
+  <div class="welcome-text">Clique para abrir</div>
+</div>
+
+<!-- AUDIO -->
+<audio id="bg-music" loop>
+  <source src="Ainda-bem-Menos-e-mais.mp3" type="audio/mpeg">
+</audio>
+
+<!-- MAIN -->
+<div class="container" id="main-content">
+  <div class="hero">
+    <div class="photo">
+      <img src="foto-casal.jpeg" alt="Brenda & Marlon">
+    </div>
+    <h1>Brenda & Marlon</h1>
+    <div class="subtitle" style="font-family:'Playfair Display',serif; font-size:22px; color:#dc6478; margin-top:-10px;">
+      Nosso amor é a melhor parte da minha vida
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="title">Mensagem de hoje</div>
+    <div class="message" id="dailyMessage">Carregando...</div>
+  </div>
+
+  <div class="card">
+    <div class="title">Nosso tempo junto</div>
+    <div class="counter" id="counter">...</div>
+    <div class="small">Desde 18/03/2024</div>
+  </div>
+
+  <!-- MUSIC -->
+  <div class="card">
+    <div class="title">Nossa música</div>
+    <div class="music-player playing" id="music-player">
+      <div class="music-cover">
+        <i class="fa-solid fa-music"></i>
+      </div>
+      <div class="music-info">
+        <div class="song-title">Ainda Bem</div>
+        <div class="song-artist">Menos é Mais</div>
+        <div class="wave">
+          <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+        </div>
+      </div>
+    </div>
+    <button id="music-btn" onclick="toggleMusic()">Pausar Música ⏸️</button>
+  </div>
+
+  <div class="card">
+    <div class="title">Surpresa</div>
+    <button onclick="triggerSurprise()">Clique para descobrir ✨</button>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="socials">
+      <a href="https://instagram.com/kusaipresentes" target="_blank" class="social-btn">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://wa.me/5521983034801" target="_blank" class="social-btn">
+        <i class="fab fa-whatsapp"></i>
+      </a>
+    </div>
+    <div class="footer-text">criado com ❤️ por Kusai Presentes</div>
+  </div>
+</div>
+
+<script>
+// ==================== CONFIGURAÇÕES ====================
+const startDate = new Date(2024, 2, 18); // 18/03/2024
+
+const messages = [
+  "Você ainda é meu lugar favorito.",
+  "Seu abraço continua sendo minha paz.",
+  "Com você, tudo faz sentido.",
+  "Obrigado por existir na minha vida.",
+  "Eu escolheria você de novo.",
+  "Nosso amor mora nos detalhes.",
+  "Você faz o mundo parecer mais leve.",
+  "Até nos dias difíceis, ainda é você."
+];
+
+const surprises = [
+  {
+    type: "text",
+    content: "Amor, só queria te lembrar que você é uma das melhores coisas que já aconteceram na minha vida. Seu carinho, seu abraço e seu jeito fazem meus dias mais felizes. Te amo muito e sou grata por ter você ao meu lado. ❤️"
+  },
+  {
+    type: "video",
+    content: "video-surpresa.mov",
+    title: "Nossos momentos 🎥"
+  },
+  {
+    type: "text",
+    content: "12/06 - Eu escolhi você para ficar, meu grande amor! 😍"
+  }
+];
+
+// ==================== FUNÇÕES ====================
+function startExperience(){
+  const music = document.getElementById('bg-music');
+  music.play().catch(()=>{});
+  
+  document.getElementById('welcome-screen').style.opacity = '0';
+  setTimeout(() => {
+    document.getElementById('welcome-screen').style.visibility = 'hidden';
+  }, 800);
+  
+  document.getElementById('main-content').classList.add('visible');
+  loadDailyMessage();
+  updateCounter();
+}
+
+function toggleMusic(){
+  const music = document.getElementById('bg-music');
+  const btn = document.getElementById('music-btn');
+  const player = document.getElementById('music-player');
+  
+  if(music.paused){
+    music.play();
+    btn.innerHTML = 'Pausar Música ⏸️';
+    player.classList.add('playing');
+  } else {
+    music.pause();
+    btn.innerHTML = 'Tocar Música ▶️';
+    player.classList.remove('playing');
+  }
+}
+
+function loadDailyMessage(){
+  const now = new Date();
+  const day = Math.floor((now - new Date(now.getFullYear(),0,0)) / 86400000);
+  document.getElementById('dailyMessage').innerText = messages[day % messages.length];
+}
+
+function updateCounter(){
+  const now = new Date();
+  let years = now.getFullYear() - startDate.getFullYear();
+  let months = now.getMonth() - startDate.getMonth();
+  let days = now.getDate() - startDate.getDate();
+
+  if(days < 0){
+    months--;
+    const lastMonth = new Date(now.getFullYear(), now.getMonth(), 0).getDate();
+    days += lastMonth;
+  }
+  if(months < 0){
+    years--;
+    months += 12;
+  }
+
+  document.getElementById('counter').innerText = `${years} anos, ${months} meses e ${days} dias`;
+}
+
+function triggerSurprise(){
+  createConfetti();
+  const item = surprises[Math.floor(Math.random() * surprises.length)];
+  showModal(item);
+}
+
+function createConfetti(){
+  const colors = ['#dc6478','#ea8da0','#ffd1dc'];
+  for(let i=0; i<40; i++){
+    const el = document.createElement('div');
+    el.className = 'confetti';
+    el.style.left = Math.random()*100 + 'vw';
+    el.style.background = colors[Math.floor(Math.random()*colors.length)];
+    el.style.animationDuration = (Math.random()*2 + 1) + 's';
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 3000);
+  }
+}
+
+function showModal(item){
+  const overlay = document.createElement('div');
+  overlay.className = 'modal-overlay';
+  
+  const content = document.createElement('div');
+  content.className = 'modal-content';
+  
+  let html = '';
+  if(item.type === 'text'){
+    html = `<p style="font-size:26px; line-height:1.4; font-family:'Playfair Display',serif;">${item.content}</p>`;
+  } else if(item.type === 'video'){
+    html = `<h3>${item.title}</h3>
+            <video controls autoplay>
+              <source src="${item.content}">
+            </video>`;
+  }
+  
+  content.innerHTML = html;
+  
+  const btn = document.createElement('button');
+  btn.innerText = 'Fechar ❤️';
+  btn.onclick = () => overlay.remove();
+  content.appendChild(btn);
+  
+  overlay.appendChild(content);
+  document.body.appendChild(overlay);
+}
+</script>
+</body>
+</html>
