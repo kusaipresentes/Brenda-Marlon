@@ -8,214 +8,113 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&family=Cormorant+Garamond:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
-/* (CSS mantido igual ao original - só adicionei a fonte Cormorant) */
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family:'Inter',sans-serif;
+  background: linear-gradient(135deg,#f8f3f1 0%,#fff8f6 100%);
+  color:#222;
+  overflow-x:hidden;
+  min-height:100vh;
 }
-body{
-font-family:'Inter',sans-serif;
-background: linear-gradient(135deg,#f8f3f1 0%,#fff8f6 100%);
-color:#222;
-overflow-x:hidden;
-min-height:100vh;
+#welcome-screen {
+  position:fixed; inset:0; background:white; z-index:9999;
+  display:flex; flex-direction:column; justify-content:center; align-items:center;
+  transition:.8s;
 }
-#welcome-screen{
-position:fixed;
-inset:0;
-background:white;
-z-index:9999;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-transition:.8s;
+.welcome-heart { font-size:90px; cursor:pointer; animation:heartbeat 1.4s infinite; }
+.welcome-text {
+  margin-top:18px; font-size:24px; font-family:'Playfair Display',serif; color:#dc6478;
 }
-.welcome-heart{
-font-size:90px;
-cursor:pointer;
-animation:heartbeat 1.4s infinite;
+@keyframes heartbeat { 0%,100%{transform:scale(1);} 25%{transform:scale(1.08);} 50%{transform:scale(1);} }
+
+.container {
+  max-width:520px; margin:auto; padding:28px 22px 60px;
+  opacity:0; transform:translateY(20px); transition:1s;
 }
-.welcome-text{
-margin-top:18px;
-font-size:24px;
-font-family:'Playfair Display',serif;
-color:#dc6478;
+.container.visible { opacity:1; transform:none; }
+
+.hero { text-align:center; margin-top:20px; }
+.photo {
+  border-radius:30px; overflow:hidden;
+  box-shadow:0 20px 60px rgba(220,100,120,.18);
+  border:1px solid rgba(255,255,255,.6);
+  margin-bottom:28px;
 }
-@keyframes heartbeat{
-0%,100%{transform:scale(1);}
-25%{transform:scale(1.08);}
-50%{transform:scale(1);}
-}
-.container{
-max-width:520px;
-margin:auto;
-padding:28px 22px 60px;
-opacity:0;
-transform:translateY(20px);
-transition:1s;
-}
-.container.visible{
-opacity:1;
-transform:none;
-}
-.hero{
-text-align:center;
-margin-top:20px;
-}
-.photo{
-border-radius:30px;
-overflow:hidden;
-box-shadow:0 20px 60px rgba(220,100,120,.18);
-border:1px solid rgba(255,255,255,.6);
-margin-bottom:28px;
-}
-.photo img{
-width:100%;
-display:block;
-}
+.photo img { width:100%; display:block; }
+
 h1 {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 52px;
-  font-weight: 700;
-  line-height: 1.15;
-  padding-bottom: 6px;
-  margin-bottom: 10px;
+  font-size: 52px; font-weight: 700; line-height: 1.15;
   background: linear-gradient(135deg, #dc6478 0%, #e8839a 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
 }
-.card{
-background:rgba(255,255,255,.72);
-backdrop-filter:blur(14px);
-border:1px solid rgba(255,255,255,.6);
-padding:26px;
-border-radius:28px;
-margin-top:22px;
-box-shadow:0 10px 30px rgba(0,0,0,.05);
-transition:.25s;
+
+.card {
+  background:rgba(255,255,255,.72); backdrop-filter:blur(14px);
+  border:1px solid rgba(255,255,255,.6);
+  padding:26px; border-radius:28px; margin-top:22px;
+  box-shadow:0 10px 30px rgba(0,0,0,.05); transition:.25s;
 }
-.card:hover{
-transform:translateY(-2px);
+.card:hover { transform:translateY(-2px); }
+
+.title {
+  font-size:12px; letter-spacing:3px; text-transform:uppercase;
+  font-weight:700; opacity:.45; margin-bottom:14px;
 }
-.title{
-font-size:12px;
-letter-spacing:3px;
-text-transform:uppercase;
-font-weight:700;
-opacity:.45;
-margin-bottom:14px;
+.message {
+  font-size:28px; line-height:1.35;
+  font-family:'Playfair Display',serif; color:#2d2d2d;
 }
-.message{
-font-size:28px;
-line-height:1.35;
-font-family:'Playfair Display',serif;
-color:#2d2d2d;
+.counter {
+  font-size:34px; font-weight:700;
+  background:linear-gradient(135deg,#dc6478,#ea8da0);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  margin-bottom:10px;
 }
-.counter{
-font-size:34px;
-font-weight:700;
-background:linear-gradient(135deg,#dc6478,#ea8da0);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-margin-bottom:10px;
+.small { font-size:14px; color:#777; }
+
+.music-player {
+  display:flex; align-items:center; gap:16px;
 }
-.small{
-font-size:14px;
-color:#777;
+.music-cover {
+  width:68px; height:68px; border-radius:18px;
+  background: url('Ainda-bem-Menos-e-mais.png') center/cover;
+  box-shadow:0 10px 25px rgba(220,100,120,.3);
 }
-button{
-width:100%;
-border:none;
-padding:18px;
-border-radius:18px;
-background:linear-gradient(135deg,#dc6478,#ea8da0);
-color:white;
-font-size:15px;
-font-weight:700;
-cursor:pointer;
-margin-top:18px;
-box-shadow:0 10px 25px rgba(220,100,120,.3);
-transition:.2s;
+.music-info { flex:1; }
+.song-title { font-size:16px; font-weight:700; margin-bottom:4px; }
+.song-artist { font-size:13px; color:#777; margin-bottom:10px; }
+
+button {
+  width:100%; border:none; padding:18px; border-radius:18px;
+  background:linear-gradient(135deg,#dc6478,#ea8da0);
+  color:white; font-size:15px; font-weight:700;
+  cursor:pointer; margin-top:18px;
+  box-shadow:0 10px 25px rgba(220,100,120,.3);
 }
-button:active{
-transform:scale(.98);
+button:active { transform:scale(.98); }
+
+.modal-overlay {
+  position:fixed; inset:0; background:rgba(0,0,0,.85);
+  display:flex; justify-content:center; align-items:center;
+  padding:20px; z-index:99999;
 }
-.footer{
-margin-top:48px;
-text-align:center;
-padding-bottom:20px;
+.modal-content {
+  background:white; padding:30px; border-radius:28px;
+  max-width:420px; width:100%; text-align:center;
 }
-.socials{
-display:flex;
-justify-content:center;
-gap:16px;
-margin-bottom:20px;
+audio, video { width:100%; margin-top:15px; border-radius:14px; }
+
+.confetti {
+  position:fixed; width:10px; height:10px; border-radius:50%;
+  pointer-events:none; animation:fall 2s linear forwards; z-index:99999;
 }
-.social-btn{
-width:54px;
-height:54px;
-border-radius:50%;
-background:white;
-display:flex;
-align-items:center;
-justify-content:center;
-text-decoration:none;
-color:#dc6478;
-font-size:22px;
-box-shadow:0 8px 22px rgba(0,0,0,.08);
-transition:.25s;
-}
-.social-btn:hover{
-transform:translateY(-3px);
-}
-.footer-text{
-font-size:13px;
-color:#888;
-}
-.modal-overlay{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.85);
-display:flex;
-justify-content:center;
-align-items:center;
-padding:20px;
-z-index:99999;
-}
-.modal-content{
-background:white;
-padding:30px;
-border-radius:28px;
-max-width:420px;
-width:100%;
-text-align:center;
-}
-audio,video{
-width:100%;
-margin-top:15px;
-border-radius:14px;
-}
-.confetti{
-position:fixed;
-width:10px;
-height:10px;
-border-radius:50%;
-pointer-events:none;
-animation:fall 2s linear forwards;
-z-index:99999;
-}
-@keyframes fall{
-to{
-transform:translateY(120vh) rotate(720deg);
-opacity:0;
-}
-}
-@media(max-width:480px){
-h1{font-size:40px;}
-.counter{font-size:28px;}
-.message{font-size:24px;}
+@keyframes fall { to { transform:translateY(120vh) rotate(720deg); opacity:0; } }
+
+@media(max-width:480px) {
+  h1 { font-size:40px; }
+  .counter { font-size:28px; }
+  .message { font-size:24px; }
 }
 </style>
 </head>
@@ -229,7 +128,7 @@ h1{font-size:40px;}
 
 <!-- AUDIO -->
 <audio id="bg-music" loop>
-  <source src="Ainda-bem-Menos-e-mais.mp3" type="audio/mpeg">
+  <source src="Ainda-bem-Menos-e-mais.mp3.mp3" type="audio/mpeg">
 </audio>
 
 <!-- MAIN -->
@@ -259,9 +158,7 @@ h1{font-size:40px;}
   <div class="card">
     <div class="title">Nossa música</div>
     <div class="music-player playing" id="music-player">
-      <div class="music-cover">
-        <i class="fa-solid fa-music"></i>
-      </div>
+      <div class="music-cover"></div>
       <div class="music-info">
         <div class="song-title">Ainda Bem</div>
         <div class="song-artist">Menos é Mais</div>
@@ -294,7 +191,11 @@ h1{font-size:40px;}
 
 <script>
 // ==================== CONFIGURAÇÕES ====================
-const startDate = new Date(2024, 2, 18); // 18/03/2024
+const startDate = new Date(2024, 2, 18);
+
+const specialMessages = {
+  "12-06": "Eu escolhi você para ficar, meu grande amor! 😍"
+};
 
 const messages = [
   "Você ainda é meu lugar favorito.",
@@ -308,30 +209,18 @@ const messages = [
 ];
 
 const surprises = [
-  {
-    type: "text",
-    content: "Amor, só queria te lembrar que você é uma das melhores coisas que já aconteceram na minha vida. Seu carinho, seu abraço e seu jeito fazem meus dias mais felizes. Te amo muito e sou grata por ter você ao meu lado. ❤️"
-  },
-  {
-    type: "video",
-    content: "video-surpresa.mov",
-    title: "Nossos momentos 🎥"
-  },
-  {
-    type: "text",
-    content: "12/06 - Eu escolhi você para ficar, meu grande amor! 😍"
-  }
+  { type: "text", content: "Amor, só queria te lembrar que você é uma das melhores coisas que já aconteceram na minha vida. Seu carinho, seu abraço e seu jeito fazem meus dias mais felizes. Te amo muito e sou grata por ter você ao meu lado. ❤️" },
+  { type: "image", content: "foto-surpresa.jpeg", title: "Uma foto especial pra você 📸" },
+  { type: "video", content: "video-surpresa.mp4", title: "Nossos momentos 🎥" }
 ];
 
 // ==================== FUNÇÕES ====================
 function startExperience(){
   const music = document.getElementById('bg-music');
-  music.play().catch(()=>{});
+  music.play().catch(e => console.log("Autoplay bloqueado:", e));
   
   document.getElementById('welcome-screen').style.opacity = '0';
-  setTimeout(() => {
-    document.getElementById('welcome-screen').style.visibility = 'hidden';
-  }, 800);
+  setTimeout(() => document.getElementById('welcome-screen').style.visibility = 'hidden', 800);
   
   document.getElementById('main-content').classList.add('visible');
   loadDailyMessage();
@@ -356,26 +245,24 @@ function toggleMusic(){
 
 function loadDailyMessage(){
   const now = new Date();
-  const day = Math.floor((now - new Date(now.getFullYear(),0,0)) / 86400000);
-  document.getElementById('dailyMessage').innerText = messages[day % messages.length];
+  const monthDay = `${now.getMonth()+1}`.padStart(2,'0') + '-' + `${now.getDate()}`.padStart(2,'0');
+  
+  // Verifica se tem mensagem especial hoje
+  if(specialMessages[monthDay]){
+    document.getElementById('dailyMessage').innerText = specialMessages[monthDay];
+  } else {
+    const day = Math.floor((now - new Date(now.getFullYear(),0,0)) / 86400000);
+    document.getElementById('dailyMessage').innerText = messages[day % messages.length];
+  }
 }
 
-function updateCounter(){
+function updateCounter(){ /* mantido igual */ 
   const now = new Date();
   let years = now.getFullYear() - startDate.getFullYear();
   let months = now.getMonth() - startDate.getMonth();
   let days = now.getDate() - startDate.getDate();
-
-  if(days < 0){
-    months--;
-    const lastMonth = new Date(now.getFullYear(), now.getMonth(), 0).getDate();
-    days += lastMonth;
-  }
-  if(months < 0){
-    years--;
-    months += 12;
-  }
-
+  if(days < 0){ months--; const lastMonth = new Date(now.getFullYear(), now.getMonth(), 0).getDate(); days += lastMonth; }
+  if(months < 0){ years--; months += 12; }
   document.getElementById('counter').innerText = `${years} anos, ${months} meses e ${days} dias`;
 }
 
@@ -385,7 +272,7 @@ function triggerSurprise(){
   showModal(item);
 }
 
-function createConfetti(){
+function createConfetti(){ /* mantido igual */ 
   const colors = ['#dc6478','#ea8da0','#ffd1dc'];
   for(let i=0; i<40; i++){
     const el = document.createElement('div');
@@ -401,13 +288,14 @@ function createConfetti(){
 function showModal(item){
   const overlay = document.createElement('div');
   overlay.className = 'modal-overlay';
-  
   const content = document.createElement('div');
   content.className = 'modal-content';
   
   let html = '';
   if(item.type === 'text'){
     html = `<p style="font-size:26px; line-height:1.4; font-family:'Playfair Display',serif;">${item.content}</p>`;
+  } else if(item.type === 'image'){
+    html = `<h3>${item.title}</h3><img src="${item.content}" style="width:100%; border-radius:16px; margin:15px 0;">`;
   } else if(item.type === 'video'){
     html = `<h3>${item.title}</h3>
             <video controls autoplay>
@@ -416,7 +304,6 @@ function showModal(item){
   }
   
   content.innerHTML = html;
-  
   const btn = document.createElement('button');
   btn.innerText = 'Fechar ❤️';
   btn.onclick = () => overlay.remove();
