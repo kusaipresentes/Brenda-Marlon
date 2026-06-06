@@ -22,17 +22,14 @@ body {
 .welcome-heart { font-size:90px; cursor:pointer; animation:heartbeat 1.4s infinite; }
 .welcome-text { margin-top:18px; font-size:24px; font-family:'Playfair Display',serif; color:#dc6478; }
 @keyframes heartbeat { 0%,100%{transform:scale(1);} 25%{transform:scale(1.08);} 50%{transform:scale(1);} }
-
 .container {
   max-width:520px; margin:auto; padding:28px 22px 60px;
   opacity:0; transform:translateY(20px); transition:1s;
 }
 .container.visible { opacity:1; transform:none; }
-
 .hero { text-align:center; margin-top:20px; }
 .photo { border-radius:30px; overflow:hidden; box-shadow:0 20px 60px rgba(220,100,120,.18); border:1px solid rgba(255,255,255,.6); margin-bottom:28px; }
 .photo img { width:100%; display:block; }
-
 h1 {
   font-family: 'Cormorant Garamond', serif;
   font-size: 52px; font-weight: 700;
@@ -40,7 +37,6 @@ h1 {
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   margin-bottom: 8px;
 }
-
 .card {
   background:rgba(255,255,255,.72); backdrop-filter:blur(14px);
   border:1px solid rgba(255,255,255,.6);
@@ -50,7 +46,6 @@ h1 {
 .title { font-size:12px; letter-spacing:3px; text-transform:uppercase; font-weight:700; opacity:.45; margin-bottom:14px; }
 .message { font-size:28px; line-height:1.35; font-family:'Playfair Display',serif; color:#2d2d2d; }
 .counter { font-size:34px; font-weight:700; background:linear-gradient(135deg,#dc6478,#ea8da0); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
-
 .music-player { display:flex; align-items:center; gap:16px; }
 .music-cover {
   width:68px; height:68px; border-radius:18px;
@@ -64,7 +59,6 @@ h1 {
 .bar:nth-child(4){animation-delay:.3s;}
 .bar:nth-child(5){animation-delay:.4s;}
 @keyframes wave { 0%,100%{height:6px;} 50%{height:22px;} }
-
 button {
   width:100%; padding:18px; border:none; border-radius:18px;
   background:linear-gradient(135deg,#dc6478,#ea8da0); color:white;
@@ -73,7 +67,6 @@ button {
 button:active { transform:scale(0.95); }
 .surprise-btn { animation: surprisePulse 2s infinite; }
 @keyframes surprisePulse { 0%,100% { transform:scale(1); } 50% { transform:scale(1.05); } }
-
 .modal-overlay {
   position:fixed; inset:0; background:rgba(0,0,0,.85);
   display:flex; justify-content:center; align-items:center; z-index:99999;
@@ -81,7 +74,6 @@ button:active { transform:scale(0.95); }
 .modal-content {
   background:white; padding:30px; border-radius:28px; max-width:420px; width:100%; text-align:center;
 }
-audio, video { width:100%; margin-top:15px; border-radius:14px; }
 </style>
 </head>
 <body>
@@ -157,9 +149,8 @@ const specialMessages = {
   "12-06": "12/06 - Eu escolhi você para ficar, meu grande amor! 😍"
 };
 
-// 60 mensagens para o "Mensagem de hoje"
 const dailyMessages = [
-  "Você ainda é meu lugar favorito.", "Seu abraço continua sendo minha paz.", 
+  "Você ainda é meu lugar favorito.", "Seu abraço continua sendo minha paz.",
   "Com você, tudo faz sentido.", "Obrigado por existir na minha vida.",
   "Eu escolheria você de novo.", "Nosso amor mora nos detalhes.",
   "Você faz o mundo parecer mais leve.", "Até nos dias difíceis, ainda é você.",
@@ -170,7 +161,7 @@ const dailyMessages = [
   "Meu lugar favorito continua sendo ao seu lado.",
   "Mesmo nas horas em que estamos longe, sinto você perto de mim.",
   "Seu abraço ainda é o lugar onde eu encontro paz.",
-  "Você faz parte de todos os meus melhores momentos, até dos mais simples.",
+  "Você faz parte de todos dos meus melhores momentos, até dos mais simples.",
   "O meu dia sempre fica melhor quando lembro que tenho você.",
   "Você está presente até nos pequenos detalhes da minha vida.",
   "Não importa quanto tempo passe até a gente se encontrar de novo, você continua sendo o meu pensamento favorito.",
@@ -216,16 +207,21 @@ const dailyMessages = [
   "Gratidão é pouco para tudo que sinto por ter você na minha vida."
 ];
 
-// As 20 mensagens + mídias para Surpresas
 let surprisesPool = [];
 let currentSurprises = [];
 
 function resetSurprises() {
   surprisesPool = [
-    { type: "text", content: "Amor, só queria te lembrar que você é uma das melhores coisas que já aconteceram na minha vida. Seu carinho, seu abraço e seu jeito fazem meus dias mais felizes. Te amo muito e sou grata por ter você ao meu lado. ❤️", weight: 6 },
-    { type: "image", content: "foto-surpresa.jpeg", title: "Uma foto especial pra você 📸", weight: 8 },
-    { type: "video", content: "video-surpresa.mp4", title: "Nossos momentos 🎥", weight: 8 },
-    // As 20 mensagens específicas para surpresa
+    // IMAGEM no lugar da frase longa
+    { type: "image", content: "recado.png", title: "Uma mensagem especial pra você 💌" },
+    
+    // Foto surpresa
+    { type: "image", content: "foto-surpresa.jpeg", title: "Uma foto especial pra você 📸" },
+    
+    // Vídeo
+    { type: "video", content: "video-surpresa.mp4", title: "Nossos momentos 🎥" },
+    
+    // 20 mensagens curtas
     { type: "text", content: "Mesmo quando você não está por perto, meu dia continua cheio de você." },
     { type: "text", content: "Você é a melhor parte da minha rotina." },
     { type: "text", content: "Só de saber que vou te ver mais tarde, meu coração já sorri." },
@@ -298,9 +294,7 @@ function updateCounter(){
 
 function triggerSurprise(){
   createConfetti();
-  
   if (currentSurprises.length === 0) resetSurprises();
-  
   const item = currentSurprises.pop();
   showModal(item);
 }
@@ -324,15 +318,39 @@ function showModal(item){
   const content = document.createElement('div');
   content.className = 'modal-content';
   
-  let html = item.title ? `<h3>${item.title}</h3>` : '';
-  if(item.type === 'text') html += `<p style="font-size:26px;line-height:1.4;">${item.content}</p>`;
-  else if(item.type === 'image') html += `<img src="${item.content}" style="max-width:100%;border-radius:16px;">`;
-  else if(item.type === 'video') html += `<video controls autoplay><source src="${item.content}"></video>`;
+  let html = '';
+
+  if(item.type === 'text'){
+    html = `<p style="font-size:24px; line-height:1.6; padding:25px 15px; color:#3f2a1e; font-family:'Playfair Display',serif;">
+              ${item.content}
+            </p>`;
+  } 
+  else if(item.type === 'image'){
+    html = `<h3>${item.title}</h3><img src="${item.content}" style="max-width:100%; border-radius:16px;">`;
+  } 
+  else if(item.type === 'video'){
+    // Pausa a música automaticamente
+    const bgMusic = document.getElementById('bg-music');
+    if (bgMusic) bgMusic.pause();
+
+    html = `
+      <h3 style="margin-bottom:15px;">${item.title}</h3>
+      <video 
+        controls 
+        playsinline 
+        style="width:100%; max-height:55vh; border-radius:12px; background:#000; display:block;">
+        <source src="${item.content}" type="video/mp4">
+      </video>
+    `;
+  }
   
   content.innerHTML = html;
+
   const btn = document.createElement('button');
-  btn.textContent = 'Fechar ❤️'; btn.onclick = () => overlay.remove();
+  btn.textContent = 'Fechar ❤️';
+  btn.onclick = () => overlay.remove();
   content.appendChild(btn);
+
   overlay.appendChild(content);
   document.body.appendChild(overlay);
 }
