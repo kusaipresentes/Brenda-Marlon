@@ -17,24 +17,32 @@ body {
 
 /* Bilhetinho Romântico */
 .note {
-  background: #fffef0;
-  background-image: 
-    linear-gradient(#f8e8c7 1px, transparent 1px),
-    linear-gradient(90deg, #f8e8c7 1px, transparent 1px);
-  background-size: 20px 20px;
-  border: 1px solid #e8d5b8;
-  box-shadow: 8px 8px 15px rgba(0,0,0,0.15),
-              inset 0 0 40px rgba(220, 100, 120, 0.08);
-  padding: 45px 35px;
+  background: #fffaf0;
+  border: 1px solid #f0d9b5;
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.12),
+    inset 0 0 60px rgba(255, 240, 220, 0.6);
+  padding: 50px 40px;
   max-width: 100%;
   margin: 25px auto;
   position: relative;
-  transform: rotate(-1deg);
-  font-family: 'Great Vibes', cursive;
-  font-size: 26px;
-  line-height: 1.45;
+  border-radius: 8px;
+  font-family: 'Playfair Display', serif;
+  font-size: 23px;
+  line-height: 1.55;
   color: #3f2a1e;
   text-align: center;
+}
+
+/* Pequeno coração decorativo */
+.note::after {
+  content: "❤️";
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 28px;
+  opacity: 0.85;
 }
 
 #welcome-screen {
@@ -341,13 +349,12 @@ function showModal(item){
   let html = '';
 
   if(item.type === 'text'){
-    // Verifica se é a mensagem especial longa
     if(item.content.includes("Amor, só queria te lembrar que você é uma das melhores coisas")) {
-      // Aplica o estilo de bilhetinho só nessa mensagem
+      // Bilhetinho só para a mensagem especial
       html = `<div class="note">${item.content}</div>`;
     } else {
-      // Mensagens curtas normais (mais limpas)
-      html = `<p style="font-size:24px; line-height:1.5; padding:20px 10px; color:#3f2a1e; font-family:'Playfair Display',serif;">
+      // Mensagens curtas normais
+      html = `<p style="font-size:24px; line-height:1.6; padding:25px 15px; color:#3f2a1e; font-family:'Playfair Display',serif;">
                 ${item.content}
               </p>`;
     }
