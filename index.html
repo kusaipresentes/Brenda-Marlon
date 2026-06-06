@@ -15,24 +15,36 @@ body {
   min-height:100vh;
 }
 
-/* ==================== CONFETES ==================== */
-.confetti {
-  position: fixed;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 99999;
-  animation: confetti-fall linear forwards;
+/* Confetti */
+#confetti-container{
+  position:fixed;
+  inset:0;
+  overflow:hidden;
+  pointer-events:none;
+  z-index:999999;
 }
 
-@keyframes confetti-fall {
-  to {
-    transform: translateY(120vh) rotate(720deg);
-    opacity: 0;
+.confetti{
+  position:absolute;
+  top:-20px;
+  width:10px;
+  height:10px;
+  pointer-events:none;
+  opacity:1;
+  animation:fall linear forwards;
+}
+
+@keyframes fall{
+  from{
+    transform:translateY(0) rotate(0deg);
+    opacity:1;
+  }
+  to{
+    transform:translateY(calc(100vh + 40px)) rotate(720deg);
+    opacity:0;
   }
 }
-  
+
 /* Welcome */
 #welcome-screen {
   position:fixed; inset:0; background:white; z-index:9999;
@@ -155,6 +167,9 @@ button:active { transform:scale(0.95); }
 </style>
 </head>
 <body>
+
+<div id="confetti-container"></div>
+
 
 <div id="welcome-screen" onclick="startExperience()">
   <div class="welcome-heart">❤️</div>
@@ -366,45 +381,61 @@ function updateCounter(){
 }
 
 function triggerSurprise(){
-  if (currentSurprises.length === 0) resetSurprises();
+
+  if(currentSurprises.length === 0){
+    resetSurprises();
+  }
+
   const item = currentSurprises.pop();
-  showModal(item);           // Primeiro cria o modal
-  createConfetti();          // Depois cria os confetes (ficam por cima)
+
+  showModal(item);
+
+  setTimeout(() => {
+    createConfetti();
+  }, 100);
 }
 
-function createConfetti() {
-  const colors = ['#dc6478', '#ea8da0', '#ffd1dc', '#ff9eb8', '#c23d5e', '#ffffff'];
-  
-  for (let i = 0; i < 180; i++) {
-    const confetti = document.createElement('div');
-    confetti.className = 'confetti';
-    
-    confetti.style.left = Math.random() * window.innerWidth + 'px';
-    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
-    
-    const size = Math.random() * 13 + 8;
-    confetti.style.width = size + 'px';
-    confetti.style.height = size + 'px';
-    
-    if (Math.random() > 0.65) {
-      confetti.style.borderRadius = '2px'; // alguns quadrados
-    }
-    
-    const duration = Math.random() * 3.8 + 3.2;
-    confetti.style.animationDuration = duration + 's';
-    confetti.style.animationDelay = Math.random() * 0.6 + 's';
-    
-    // z-index extremamente alto para ficar acima do modal
-    confetti.style.zIndex = '9999999';
-    
-    document.body.appendChild(confetti);
-    
+function createConfetti(){
+
+  const container = document.getElementById("confetti-container");
+
+  const colors = [
+    "#dc6478",
+    "#ea8da0",
+    "#ffd1dc",
+    "#ff9eb8",
+    "#ffffff",
+    "#c23d5e"
+  ];
+
+  for(let i = 0; i < 120; i++){
+
+    const el = document.createElement("div");
+    el.className = "confetti";
+
+    const size = Math.random() * 10 + 6;
+
+    el.style.left = Math.random() * 100 + "%";
+    el.style.width = size + "px";
+    el.style.height = size + "px";
+
+    el.style.background =
+      colors[Math.floor(Math.random() * colors.length)];
+
+    el.style.borderRadius =
+      Math.random() > 0.5 ? "50%" : "2px";
+
+    el.style.animationDuration =
+      (Math.random() * 2 + 3) + "s";
+
+    container.appendChild(el);
+
     setTimeout(() => {
-      if (confetti.parentNode) confetti.parentNode.removeChild(confetti);
-    }, (duration + 2) * 1000);
+      el.remove();
+    }, 5500);
   }
 }
-  
+
 function showModal(item){
   const overlay = document.createElement('div');
   overlay.className = 'modal-overlay';
