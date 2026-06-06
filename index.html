@@ -15,23 +15,24 @@ body {
   min-height:100vh;
 }
 
-/* Confetti */
+/* ==================== CONFETES ==================== */
 .confetti {
-  position:fixed;
-  width:10px;
-  height:10px;
-  border-radius:50%;
-  pointer-events:none;
-  animation:fall 2.5s linear forwards;
-  z-index:99999;
-}
-@keyframes fall {
-  to {
-    transform: translateY(120vh) rotate(720deg);
-    opacity:0;
-  }
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  animation: confetti-fall linear forwards;
 }
 
+@keyframes confetti-fall {
+  to {
+    transform: translateY(120vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+  
 /* Welcome */
 #welcome-screen {
   position:fixed; inset:0; background:white; z-index:9999;
@@ -371,16 +372,44 @@ function triggerSurprise(){
   showModal(item);
 }
 
-function createConfetti(){
-  const colors = ['#dc6478','#ea8da0','#ffd1dc','#ff9eb8'];
-  for(let i = 0; i < 70; i++){
-    const el = document.createElement('div');
-    el.className = 'confetti';
-    el.style.left = Math.random() * 100 + 'vw';
-    el.style.background = colors[Math.floor(Math.random() * colors.length)];
-    el.style.animationDuration = (Math.random() * 2.8 + 2) + 's';
-    document.body.appendChild(el);
-    setTimeout(() => el.remove(), 5000);
+function createConfetti() {
+  const colors = ['#dc6478', '#ea8da0', '#ffd1dc', '#ff9eb8', '#c23d5e'];
+  const shapes = ['circle', 'square'];
+
+  for (let i = 0; i < 200; i++) {
+    const confetti = document.createElement('div');
+    confetti.className = 'confetti';
+
+    // Posição aleatória
+    confetti.style.left = Math.random() * 100 + 'vw';
+
+    // Cor aleatória
+    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+
+    // Tamanho aleatório
+    const size = Math.random() * 10 + 6;
+    confetti.style.width = size + 'px';
+    confetti.style.height = size + 'px';
+
+    // Forma (círculo ou quadrado)
+    if (Math.random() > 0.6) {
+      confetti.style.borderRadius = '2px'; // quadrado
+    }
+
+    // Duração e delay aleatórios
+    const duration = Math.random() * 3 + 2.5;
+    confetti.style.animationDuration = duration + 's';
+    confetti.style.animationDelay = Math.random() * 0.5 + 's';
+
+    // Rotação inicial aleatória
+    confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+
+    document.body.appendChild(confetti);
+
+    // Remove após a animação
+    setTimeout(() => {
+      confetti.remove();
+    }, (duration + 1) * 1000);
   }
 }
 
