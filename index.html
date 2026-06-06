@@ -327,19 +327,6 @@ function triggerSurprise(){
   showModal(item);
 }
 
-function createConfetti(){
-  const colors = ['#dc6478','#ea8da0','#ffd1dc'];
-  for(let i=0; i<50; i++){
-    const el = document.createElement('div');
-    el.className = 'confetti';
-    el.style.left = Math.random()*100 + 'vw';
-    el.style.background = colors[Math.floor(Math.random()*colors.length)];
-    el.style.animationDuration = (Math.random()*2.5 + 1.5) + 's';
-    document.body.appendChild(el);
-    setTimeout(() => el.remove(), 4000);
-  }
-}
-
 function showModal(item){
   const overlay = document.createElement('div');
   overlay.className = 'modal-overlay';
@@ -349,21 +336,32 @@ function showModal(item){
   let html = '';
 
   if(item.type === 'text'){
-    if(item.content.includes("Amor, só queria te lembrar que você é uma das melhores coisas")) {
-      // Bilhetinho só para a mensagem especial
+    if(item.content.includes("Amor, só queria te lembrar")) {
       html = `<div class="note">${item.content}</div>`;
     } else {
-      // Mensagens curtas normais
       html = `<p style="font-size:24px; line-height:1.6; padding:25px 15px; color:#3f2a1e; font-family:'Playfair Display',serif;">
                 ${item.content}
               </p>`;
     }
   } 
   else if(item.type === 'image'){
-    html = `<h3>${item.title}</h3><img src="${item.content}" style="max-width:100%;border-radius:16px;">`;
+    html = `<h3>${item.title}</h3><img src="${item.content}" style="max-width:100%; border-radius:16px;">`;
   } 
   else if(item.type === 'video'){
-    html = `<h3>${item.title}</h3><video controls autoplay><source src="${item.content}"></video>`;
+    // Pausa a música de fundo automaticamente
+    const bgMusic = document.getElementById('bg-music');
+    if (bgMusic) bgMusic.pause();
+
+    html = `
+      <h3 style="margin-bottom:15px;">${item.title}</h3>
+      <video 
+        controls 
+        playsinline 
+        style="width:100%; max-height:55vh; border-radius:12px; background:#000; display:block;">
+        <source src="${item.content}" type="video/mp4">
+        Seu navegador não suporta a reprodução de vídeo.
+      </video>
+    `;
   }
   
   content.innerHTML = html;
