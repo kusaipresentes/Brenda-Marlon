@@ -326,16 +326,23 @@ function showModal(item){
             </p>`;
   } 
   else if(item.type === 'image'){
-    // IMAGEM bem justa (mínimo de fundo)
     content.style.padding = '6px';
-    content.style.maxWidth = '520px';     // largura controlada (não muito larga)
+    content.style.maxWidth = '520px';
     content.style.borderRadius = '14px';
     
     html = `<img src="${item.content}" style="width:100%; max-height:80vh; object-fit:contain; border-radius:10px; display:block;">`;
   } 
   else if(item.type === 'video'){
+    // Pausa a música + atualiza botão e ondas
     const bgMusic = document.getElementById('bg-music');
-    if (bgMusic) bgMusic.pause();
+    const btn = document.getElementById('music-btn');
+    const player = document.getElementById('music-player');
+
+    if (bgMusic && !bgMusic.paused) {
+      bgMusic.pause();
+      if (btn) btn.innerHTML = '▶️ Tocar Música';
+      if (player) player.classList.remove('playing');
+    }
 
     html = `
       <h3 style="margin-bottom:12px;">${item.title}</h3>
@@ -351,10 +358,10 @@ function showModal(item){
   
   content.innerHTML = html;
 
-  const btn = document.createElement('button');
-  btn.textContent = 'Fechar ❤️';
-  btn.onclick = () => overlay.remove();
-  content.appendChild(btn);
+  const closeBtn = document.createElement('button');
+  closeBtn.textContent = 'Fechar ❤️';
+  closeBtn.onclick = () => overlay.remove();
+  content.appendChild(closeBtn);
 
   overlay.appendChild(content);
   document.body.appendChild(overlay);
