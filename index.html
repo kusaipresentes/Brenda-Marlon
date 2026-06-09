@@ -14,162 +14,59 @@ body {
   color:#222;
   min-height:100vh;
 }
-
 /* Confetti */
-#confetti-container{
+.confetti {
   position:fixed;
-  inset:0;
-  overflow:hidden;
-  pointer-events:none;
-  z-index:999999;
-}
-
-.confetti{
-  position:absolute;
-  top:-20px;
   width:10px;
   height:10px;
+  border-radius:50%;
   pointer-events:none;
-  opacity:1;
-  animation:fall linear forwards;
+  animation:fall 2.5s linear forwards;
+  z-index:999999;
 }
-
-@keyframes fall{
-  from{
-    transform:translateY(0) rotate(0deg);
-    opacity:1;
-  }
-  to{
-    transform:translateY(calc(100vh + 40px)) rotate(720deg);
-    opacity:0;
-  }
+@keyframes fall {
+  to { transform: translateY(130vh) rotate(900deg); opacity:0; }
 }
-
-/* Welcome */
-#welcome-screen {
-  position:fixed; inset:0; background:white; z-index:9999;
-  display:flex; flex-direction:column; justify-content:center; align-items:center;
-  transition:.8s;
-}
+/* Restante do CSS (mantido igual) */
+#welcome-screen { position:fixed; inset:0; background:white; z-index:9999; 
+                 display:flex; flex-direction:column; justify-content:center; align-items:center; 
+                 transition:.8s; 
+                }
 .welcome-heart { font-size:90px; cursor:pointer; animation:heartbeat 1.4s infinite; }
 .welcome-text { margin-top:18px; font-size:24px; font-family:'Playfair Display',serif; color:#dc6478; }
 @keyframes heartbeat { 0%,100%{transform:scale(1);} 25%{transform:scale(1.08);} 50%{transform:scale(1);} }
-
-/* Container */
-.container {
-  max-width:520px; margin:auto; padding:28px 22px 80px;
-  opacity:0; transform:translateY(20px); transition:1s;
-}
+.container { max-width:520px; margin:auto; padding:28px 22px 80px; opacity:0; transform:translateY(20px); transition:1s; }
 .container.visible { opacity:1; transform:none; }
-
-/* Hero */
 .hero { text-align:center; margin-top:20px; }
-.photo { border-radius:30px; overflow:hidden; box-shadow:0 20px 60px rgba(220,100,120,.18); border:1px solid rgba(255,255,255,.6); margin-bottom:28px; }
+.photo { border-radius:30px; overflow:hidden; box-shadow:0 20px 60px rgba(220,100,120,.18); margin-bottom:28px; }
 .photo img { width:100%; display:block; }
-
-h1 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 52px; font-weight: 700;
-  background: linear-gradient(135deg, #dc6478 0%, #e8839a 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-}
-
-/* Cards */
-.card {
-  background:rgba(255,255,255,.72); backdrop-filter:blur(14px);
-  border:1px solid rgba(255,255,255,.6);
-  padding:26px; border-radius:28px; margin-top:22px;
-  box-shadow:0 10px 30px rgba(0,0,0,.05);
-}
+h1 { font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 700; background: linear-gradient(135deg, #dc6478 0%, #e8839a 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.card { background:rgba(255,255,255,.72); backdrop-filter:blur(14px); border:1px solid rgba(255,255,255,.6); padding:26px; border-radius:28px; margin-top:22px; box-shadow:0 10px 30px rgba(0,0,0,.05); }
 .title { font-size:12px; letter-spacing:3px; text-transform:uppercase; font-weight:700; opacity:.45; margin-bottom:14px; }
-.message { 
-  font-size:28px; line-height:1.35; 
-  font-family:'Playfair Display',serif; 
-  color:#2d2d2d; 
-}
-.counter { 
-  font-size:34px; font-weight:700; 
-  background:linear-gradient(135deg,#dc6478,#ea8da0); 
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent; 
-  margin-bottom:10px; 
-}
-
-/* Música + Ondas */
+.message { font-size:28px; line-height:1.35; font-family:'Playfair Display',serif; color:#2d2d2d; }
+.counter { font-size:34px; font-weight:700; background:linear-gradient(135deg,#dc6478,#ea8da0); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:10px; }
 .music-player { display:flex; align-items:center; gap:16px; }
-.music-cover {
-  width:68px; height:68px; border-radius:18px;
-  background: url('Ainda-bem-Menos-e-mais.png') center/cover;
-  box-shadow:0 10px 25px rgba(220,100,120,.3);
-}
-.wave {
-  display:flex;
-  align-items:flex-end;
-  gap:5px;
-  height:32px;
-  margin-top:8px;
-}
-.bar {
-  width:5px;
-  height:8px;
-  background:#dc6478;
-  border-radius:999px;
-  animation:none;
-}
-.playing .bar {
-  animation: soundwave 1.05s infinite ease-in-out;
-}
+.music-cover { width:68px; height:68px; border-radius:18px; background: url('Ainda-bem-Menos-e-mais.png') center/cover; box-shadow:0 10px 25px rgba(220,100,120,.3); }
+.wave { display:flex; align-items:flex-end; gap:5px; height:32px; margin-top:8px; }
+.bar { width:5px; height:8px; background:#dc6478; border-radius:999px; animation:none; }
+.playing .bar { animation: soundwave 1.05s infinite ease-in-out; }
 .playing .bar:nth-child(1){animation-delay:0s;}
 .playing .bar:nth-child(2){animation-delay:0.15s;}
 .playing .bar:nth-child(3){animation-delay:0.3s;}
 .playing .bar:nth-child(4){animation-delay:0.45s;}
 .playing .bar:nth-child(5){animation-delay:0.6s;}
-@keyframes soundwave {
-  0%, 100% { height: 8px; }
-  50% { height: 31px; }
-}
-
-/* Botões */
-button {
-  width:100%; padding:18px; border:none; border-radius:18px;
-  background:linear-gradient(135deg,#dc6478,#ea8da0); color:white;
-  font-weight:700; cursor:pointer; margin-top:18px; transition:.3s;
-}
+@keyframes soundwave { 0%, 100% { height: 8px; } 50% { height: 31px; } }
+button { width:100%; padding:18px; border:none; border-radius:18px; background:linear-gradient(135deg,#dc6478,#ea8da0); color:white; font-weight:700; cursor:pointer; margin-top:18px; transition:.3s; }
 button:active { transform:scale(0.95); }
-
-.surprise-btn {
-  animation: surprisePulse 2s infinite;
-}
+.surprise-btn { animation: surprisePulse 2s infinite; }
 @keyframes surprisePulse { 0%,100% { transform:scale(1); } 50% { transform:scale(1.06); } }
-
-/* Botões Sociais */
-.social-btn {
-  width:54px; height:54px; border-radius:50%; background:white;
-  display:flex; align-items:center; justify-content:center;
-  text-decoration:none; color:#dc6478; font-size:24px;
-  box-shadow:0 8px 22px rgba(0,0,0,.08);
-  transition: all .3s ease;
-}
-.social-btn:hover {
-  transform: translateY(-4px) scale(1.12);
-  box-shadow:0 12px 30px rgba(220,100,120,.3);
-  color:#c23d5e;
-}
-
-/* Modal */
-.modal-overlay {
-  position:fixed; inset:0; background:rgba(0,0,0,.85);
-  display:flex; justify-content:center; align-items:center; z-index:99999; padding:20px;
-}
-.modal-content {
-  background:white; padding:25px; border-radius:28px; 
-  max-width:460px; width:100%; text-align:center;
-}
+.social-btn { width:54px; height:54px; border-radius:50%; background:white; display:flex; align-items:center; justify-content:center; text-decoration:none; color:#dc6478; font-size:24px; box-shadow:0 8px 22px rgba(0,0,0,.08); transition: all .3s ease; }
+.social-btn:hover { transform: translateY(-4px) scale(1.12); box-shadow:0 12px 30px rgba(220,100,120,.3); color:#c23d5e; }
+.modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,.85); display:flex; justify-content:center; align-items:center; z-index:99999; padding:20px; }
+.modal-content { background:white; padding:25px; border-radius:28px; max-width:460px; width:100%; text-align:center; }
 </style>
 </head>
 <body>
-
-<div id="confetti-container"></div>
-
 
 <div id="welcome-screen" onclick="startExperience()">
   <div class="welcome-heart">❤️</div>
@@ -200,7 +97,6 @@ button:active { transform:scale(0.95); }
     <div class="small">Desde 18/03/2024</div>
   </div>
 
-  <!-- MÚSICA -->
   <div class="card">
     <div class="title">Nossa música</div>
     <div class="music-player playing" id="music-player">
@@ -209,11 +105,7 @@ button:active { transform:scale(0.95); }
         <div style="font-weight:700;">Ainda Bem</div>
         <div style="color:#777; font-size:14px;">Menos é Mais</div>
         <div class="wave">
-          <div class="bar"></div>
-          <div class="bar"></div>
-          <div class="bar"></div>
-          <div class="bar"></div>
-          <div class="bar"></div>
+          <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
         </div>
       </div>
     </div>
@@ -225,15 +117,10 @@ button:active { transform:scale(0.95); }
     <button id="surpriseBtn" class="surprise-btn" onclick="triggerSurprise()">Clique para descobrir ✨</button>
   </div>
 
-  <!-- FOOTER -->
   <div class="footer" style="margin-top:50px; text-align:center; padding-bottom:30px;">
     <div style="display:flex; justify-content:center; gap:16px; margin-bottom:20px;">
-      <a href="https://instagram.com/kusaipresentes" target="_blank" class="social-btn">
-        <i class="fab fa-instagram"></i>
-      </a>
-      <a href="https://wa.me/5521983034801" target="_blank" class="social-btn">
-        <i class="fab fa-whatsapp"></i>
-      </a>
+      <a href="https://instagram.com/kusaipresentes" target="_blank" class="social-btn"><i class="fab fa-instagram"></i></a>
+      <a href="https://wa.me/5521983034801" target="_blank" class="social-btn"><i class="fab fa-whatsapp"></i></a>
     </div>
     <div style="font-size:13px; color:#888;">criado com ❤️ por Kusai Presentes</div>
   </div>
@@ -248,7 +135,7 @@ const specialMessages = {
   "06-06": "Deu Certo! 😍"
 };
 
-const dailyMessages = [
+const dailyMessages = [ 
   "Você ainda é meu lugar favorito.", "Seu abraço continua sendo minha paz.",
   "Com você, tudo faz sentido.", "Obrigado por existir na minha vida.",
   "Eu escolheria você de novo.", "Nosso amor mora nos detalhes.",
@@ -305,47 +192,92 @@ const dailyMessages = [
   "Você é e sempre será minha pessoa.",
   "Gratidão é pouco para tudo que sinto por ter você na minha vida."
 ];
-  
+
 let surprisesPool = [];
 let currentSurprises = [];
-
-function resetSurprises() {
+  function resetSurprises() {
   surprisesPool = [
-    { type: "image", content: "recado.png", title: "Uma mensagem especial pra você 💌" },
     { type: "image", content: "foto-surpresa.jpeg", title: "Uma foto especial pra você 📸" },
     { type: "video", content: "video-surpresa.mp4", title: "Nossos momentos 🎥" },
-    { type: "text", content: "Você é a melhor parte da minha rotina." },
     { type: "text", content: "Só de saber que vou te ver mais tarde, meu coração já sorri." },
     { type: "text", content: "Você transforma qualquer dia comum em um dia especial." },
     { type: "text", content: "Meu lugar favorito continua sendo ao seu lado." },
     { type: "text", content: "Seu abraço ainda é o lugar onde eu encontro paz." },
     { type: "text", content: "Você faz parte de todos os meus melhores momentos, até dos mais simples." },
-    { type: "text", content: "O meu dia sempre fica melhor quando lembro que tenho você." },
     { type: "text", content: "Ter você na minha vida faz qualquer espera valer a pena." },
-    { type: "text", content: "A melhor lembrança do meu dia quase sempre envolve você." },
     { type: "text", content: "Você consegue fazer meu coração se sentir em casa, mesmo quando não está aqui." },
     { type: "text", content: "Se existe um lugar onde eu sempre quero voltar, esse lugar é você." },
     { type: "text", content: "Quando você ler isso, só quero que saiba: amar você continua sendo a coisa mais bonita que acontece nos meus dias." }
   ];
+    
   shuffleArray(surprisesPool);
   currentSurprises = [...surprisesPool];
 }
 
-function shuffleArray(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
+// ==================== NOVA LÓGICA - MENSAGEM DO DIA ====================
+function getTodayKey() {
+  const now = new Date();
+  return `${now.getFullYear()}-${(now.getMonth()+1).toString().padStart(2,'0')}-${now.getDate().toString().padStart(2,'0')}`;
 }
 
-// ==================== FUNÇÕES ====================
+function loadDailyMessage() {
+  const todayKey = getTodayKey();
+  const savedMessage = localStorage.getItem(`dailyMessage_${todayKey}`);
+
+  if (savedMessage) {
+    document.getElementById('dailyMessage').innerText = savedMessage;
+    return;
+  }
+
+  // Verifica mensagem especial
+  const monthDay = todayKey.substring(5); // "12-06"
+  if (specialMessages[monthDay]) {
+    document.getElementById('dailyMessage').innerText = specialMessages[monthDay];
+    localStorage.setItem(`dailyMessage_${todayKey}`, specialMessages[monthDay]);
+    return;
+  }
+
+  // Sistema de ciclo sem repetição
+  let usedMessages = JSON.parse(localStorage.getItem('usedDailyMessages') || '[]');
+  
+  // Se já usou todas, reinicia o ciclo
+  if (usedMessages.length >= dailyMessages.length) {
+    usedMessages = [];
+  }
+
+  // Filtra mensagens não usadas
+  const available = dailyMessages.filter(msg => !usedMessages.includes(msg));
+  
+  // Escolhe uma aleatória
+  const selected = available[Math.floor(Math.random() * available.length)];
+  
+  document.getElementById('dailyMessage').innerText = selected;
+  localStorage.setItem(`dailyMessage_${todayKey}`, selected);
+  
+  // Registra como usada
+  usedMessages.push(selected);
+  localStorage.setItem('usedDailyMessages', JSON.stringify(usedMessages));
+}
+
+// ==================== OUTRAS FUNÇÕES ====================
 function startExperience(){
   document.getElementById('bg-music').play().catch(()=>{});
   document.getElementById('welcome-screen').style.opacity = '0';
   setTimeout(() => document.getElementById('welcome-screen').style.visibility='hidden', 800);
   document.getElementById('main-content').classList.add('visible');
-  loadDailyMessage(); updateCounter();
+  loadDailyMessage();
+  updateCounter();
   resetSurprises();
+}
+
+function updateCounter(){
+  const now = new Date();
+  let years = now.getFullYear() - startDate.getFullYear();
+  let months = now.getMonth() - startDate.getMonth();
+  let days = now.getDate() - startDate.getDate();
+  if(days < 0){ months--; days += new Date(now.getFullYear(), now.getMonth(), 0).getDate(); }
+  if(months < 0){ years--; months += 12; }
+  document.getElementById('counter').innerText = `${years} anos, ${months} meses e ${days} dias`;
 }
 
 function toggleMusic(){
